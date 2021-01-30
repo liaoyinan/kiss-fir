@@ -41,7 +41,7 @@ int main()
 
 ##### 低通滤波结果如下：
 
-![lowpass-zh](.\lowpass-zh.jpg)
+![lowpass-zh](./lowpass-zh.jpg)
 
 
 

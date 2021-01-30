@@ -41,7 +41,7 @@ int main()
 
 The low-pass filtering results are as follows:
 
-![lowpass](.\lowpass.jpg)
+![lowpass](./lowpass.jpg)
 
 
 
