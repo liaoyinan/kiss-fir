@@ -10,7 +10,7 @@ KISS FIR 是一个特别容易使用、嵌入式友好的通用实时FIR滤波�
 
 ```c
 #include <stdio.h>
-#include "fir.h"
+#include "kiss-fir.h"
 
 int main()
 {

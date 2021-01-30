@@ -10,7 +10,7 @@ This code realizes the low pass, high pass, band-pass and band-stop filter base 
 
 ```c
 #include <stdio.h>
-#include "fir.h"
+#include "kiss-fir.h"
 
 int main()
 {
