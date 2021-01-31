@@ -9,12 +9,12 @@
 
 typedef struct
 {
-    bool is_init;
     int m;
     float *cof;
     float *buf;
     int buf_idx;
     bool buf_is_full;
+    bool is_init;
 } fir_t;
 
 typedef enum
