@@ -9,12 +9,12 @@
 #define FIR_EPS  1e-6f
 #define FIR_ABS(a, b) ((a) - (b) >= 0 ? ((a) - (b)) : ((b) - (a)))
 
-struct
+static struct
 {
     fir_malloc_t malloc;
     fir_free_t free;
     fir_memset_t memset;
-} fir_config;
+} fir_config = {NULL, NULL, NULL};
 
 void fir_mem_config(fir_malloc_t p_fir_malloc, fir_free_t p_fir_free, fir_memset_t p_fir_memset)
 {
