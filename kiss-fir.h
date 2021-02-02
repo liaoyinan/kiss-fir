@@ -6,6 +6,7 @@
 #define FIR1_FIR_H
 
 #include <stdbool.h>
+#include <stdint.h>
 
 typedef struct
 {
@@ -17,12 +18,20 @@ typedef struct
     bool is_init;
 } fir_t;
 
+typedef void *(*fir_malloc_t)(size_t size);
+
+typedef void (*fir_free_t)(void *p);
+
+typedef void *(*fir_memset_t)(void *dst, int val, size_t size);
+
 typedef enum
 {
     HAMMING,
     BLACKMAN,
 } kernel_window_e;
-//
+
+void set_fir_mem_config(fir_malloc_t p_fir_malloc, fir_free_t p_fir_free, fir_memset_t p_fir_memset);
+
 fir_t *create_low_pass_fir(int order, float frequency_cutoff, float sample_rate, kernel_window_e window);
 
 fir_t *create_high_pass_fir(int order, float frequency_cutoff, float sample_rate, kernel_window_e window);

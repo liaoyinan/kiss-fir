@@ -3,17 +3,29 @@
 //
 
 #include "kiss-fir.h"
-#include <stdlib.h>
-#include <string.h>
 #include <math.h>
 
 #define FIR_F_PI 3.14159265358979323846f
 #define FIR_EPS  1e-6f
 #define FIR_ABS(a, b) ((a) - (b) >= 0 ? ((a) - (b)) : ((b) - (a)))
 
+struct
+{
+    fir_malloc_t malloc;
+    fir_free_t free;
+    fir_memset_t memset;
+} fir_config;
+
+void set_fir_mem_config(fir_malloc_t p_fir_malloc, fir_free_t p_fir_free, fir_memset_t p_fir_memset)
+{
+    fir_config.malloc = p_fir_malloc;
+    fir_config.free = p_fir_free;
+    fir_config.memset = p_fir_memset;
+}
+
 static inline fir_t *fir_alloc(int order)
 {
-    fir_t *fir = malloc(sizeof(fir_t));
+    fir_t *fir = fir_config.malloc(sizeof(fir_t));
     if (fir != NULL)
     {
         fir->is_init = false;
@@ -22,8 +34,8 @@ static inline fir_t *fir_alloc(int order)
             order += 1;
         }
         fir->m = order;
-        fir->cof = malloc((fir->m) * sizeof(float));
-        fir->buf = malloc((fir->m) * sizeof(float));
+        fir->cof = fir_config.malloc((fir->m) * sizeof(float));
+        fir->buf = fir_config.malloc((fir->m) * sizeof(float));
         fir->buf_idx = 0;
         fir->buf_is_full = false;
 
@@ -108,7 +120,7 @@ static void fir_reverse(float *cof, int len)
 
 static void compute_convolution(float *product, const float *cof1, int len1, const float *cof2, int len2)
 {
-    memset(product, 0, (len1 + len2 - 1) * sizeof(float));
+    fir_config.memset(product, 0, (len1 + len2 - 1) * sizeof(float));
     for (int i = 0; i < len1; i++)
     {
         for (int j = 0; j < len2; j++)
@@ -255,13 +267,13 @@ void fir_free(fir_t *filter)
     {
         if (filter->cof != NULL)
         {
-            free(filter->cof);
+            fir_config.free(filter->cof);
         }
         if (filter->buf != NULL)
         {
-            free(filter->buf);
+            fir_config.free(filter->buf);
         }
-        free(filter);
+        fir_config.free(filter);
         filter = NULL;
     }
 }
