@@ -10,6 +10,10 @@ int main()
     fir_t *fir20 = create_low_pass_fir(20, 5, 100, HAMMING);
     FILE *fp = fopen("./data.txt", "r");
     FILE *fp_out = fopen("./data_out.txt", "w+");
+    if (fp == NULL)
+    {
+        return -1;
+    }
 
     while (!feof(fp))
     {
