@@ -25,6 +25,10 @@ void set_fir_mem_config(fir_malloc_t p_fir_malloc, fir_free_t p_fir_free, fir_me
 
 static inline fir_t *fir_alloc(int order)
 {
+    if (fir_config.malloc == NULL || fir_config.free == NULL || fir_config.memset == NULL)
+    {
+        return NULL;
+    }
     fir_t *fir = fir_config.malloc(sizeof(fir_t));
     if (fir != NULL)
     {
