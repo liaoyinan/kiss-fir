@@ -15,7 +15,7 @@ KISS FIR 是一个特别容易使用、嵌入式友好的通用实时FIR滤波�
 int main()
 {
     float in, out;
-    set_fir_mem_config(malloc, free, memset);
+    fir_mem_config(malloc, free, memset);
     fir_t *fir20 = create_low_pass_fir(20, 5, 100, HAMMING);
     FILE *fp = fopen("./data.txt", "r");
     FILE *fp_out = fopen("./data_out.txt", "w+");

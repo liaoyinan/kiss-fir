@@ -16,7 +16,7 @@ struct
     fir_memset_t memset;
 } fir_config;
 
-void set_fir_mem_config(fir_malloc_t p_fir_malloc, fir_free_t p_fir_free, fir_memset_t p_fir_memset)
+void fir_mem_config(fir_malloc_t p_fir_malloc, fir_free_t p_fir_free, fir_memset_t p_fir_memset)
 {
     fir_config.malloc = p_fir_malloc;
     fir_config.free = p_fir_free;

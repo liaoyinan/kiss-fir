@@ -30,7 +30,7 @@ typedef enum
     BLACKMAN,
 } kernel_window_e;
 
-void set_fir_mem_config(fir_malloc_t p_fir_malloc, fir_free_t p_fir_free, fir_memset_t p_fir_memset);
+void fir_mem_config(fir_malloc_t p_fir_malloc, fir_free_t p_fir_free, fir_memset_t p_fir_memset);
 
 fir_t *create_low_pass_fir(int order, float frequency_cutoff, float sample_rate, kernel_window_e window);
 
